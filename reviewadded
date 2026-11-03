@@ -1,2 +1,2 @@
-$ curl -s -b cookies.txt -X PUT "http://localhost:5000/customer/auth/review/1?review=Great%20book"
-{"message":"Authentication required"}
+$ curl -s -X PUT "http://localhost:5000/customer/auth/review/1" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"review":"Great book"}'
+{"message":"Review added successfully","reviews":{"samagra":"Great book"}}
