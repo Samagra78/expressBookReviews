@@ -1,0 +1,2 @@
+$ curl -s -X POST http://localhost:5000/customer/login -H "Content-Type: application/json" -d '{"username":"samagra","password":"pass123"}'
+{"message":"Login successful","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbWFncmEiLCJpYXQiOjE3OTM3MzY3NDAsImV4cCI6MTc5Mzc0MDM0MH0.mxDGFa3apL90veD8aj72PLO-AdUvjQKqk5MyvOMxUeo"}
