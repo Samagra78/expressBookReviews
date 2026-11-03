@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
@@ -55,5 +56,34 @@ public_users.get('/review/:isbn', async function (req, res) {
   if (!book) return res.status(404).json({ message: "Book not found" });
   return res.status(200).json(book.reviews);
 });
+
+const BASE_URL = 'http://localhost:5000';
+
+// Async/await with Axios
+const getAllBooks = async () => {
+  const response = await axios.get(`${BASE_URL}/`);
+  return response.data;
+};
+
+const getBookByISBN = async (isbn) => {
+  const response = await axios.get(`${BASE_URL}/isbn/${isbn}`);
+  return response.data;
+};
+
+// Promise callbacks with Axios
+const getBooksByAuthor = (author) =>
+  axios.get(`${BASE_URL}/author/${encodeURIComponent(author)}`)
+    .then((response) => response.data)
+    .catch((err) => { throw err; });
+
+const getBooksByTitle = (title) =>
+  axios.get(`${BASE_URL}/title/${encodeURIComponent(title)}`)
+    .then((response) => response.data)
+    .catch((err) => { throw err; });
+
+module.exports.getAllBooks = getAllBooks;
+module.exports.getBookByISBN = getBookByISBN;
+module.exports.getBooksByAuthor = getBooksByAuthor;
+module.exports.getBooksByTitle = getBooksByTitle;
 
 module.exports.general = public_users;
